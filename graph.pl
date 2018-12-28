@@ -5,7 +5,12 @@ use File::Slurp;
 use Geo::METAR;
 use POSIX qw(strftime);
 use GD::Graph::linespoints;
+
 use GD::Graph::colour;
+
+my $line_color = "#00FF00";
+my $bg_color = "#000000";
+my $fg_color = "#00DD00";
 
 my $baseurl = "http://tgftp.nws.noaa.gov/data/observations/metar/cycles";
 my $icao = "";
@@ -70,7 +75,14 @@ $my_graph->set(
 	y_min_value => ($minobs - $pad),
 	y_max_value => ($maxobs + $pad),
 	transparent => 0,
-	bgclr => "dgray",
+	dclrs => [ $line_color ],
+	bgclr => $bg_color,
+	fgclr => $fg_color,
+	labelclr => $fg_color,
+	axislabelclr => $fg_color,
+	borderclrs => $fg_color,
+	legendclr => $fg_color,
+	textclr => $fg_color,
 );
 $my_graph->set_legend( 'Barometric Pressure' );
 my $gd = $my_graph->plot(\@data);
